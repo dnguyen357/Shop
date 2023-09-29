@@ -22,8 +22,8 @@ export default function SignIn(){
               },
               body: JSON.stringify({
                 user: {
-                  username: username,
-                  password: password
+                  "username": username,
+                  "password": password
                 }
               })
             });
