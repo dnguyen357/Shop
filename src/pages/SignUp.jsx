@@ -2,7 +2,7 @@ import { useState,useEffect } from "react"
 import { useNavigate,useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 export default function SignUp(){
-  const BASE_URL = `http://store-dcq8.onrender.com/api`
+  const BASE_URL = `https://store-dcq8.onrender.com/api`
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [firstName, setFirstName] = useState("");
