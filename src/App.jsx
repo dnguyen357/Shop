@@ -4,7 +4,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import Home from './pages/Home'
 import Cart from './pages/Cart';
 import SignUp from './pages/SignUp';
-import SignIn from './pages/Signin';
+import SignIn from './pages/SignIn';
 import Products from './pages/Products';
 import { ShopContextProvider } from './components/shopList';
 import Navbar from './Navbar';
