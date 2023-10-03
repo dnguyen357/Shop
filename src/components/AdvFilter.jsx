@@ -50,7 +50,7 @@ function FilterSidebar({ applyFilters }) {
           <input
             type="checkbox"
             value="men's clothing"
-            checked={selectedBrand.includes("men's clothing")}
+            checked={selectedBrand == ("men's clothing")}
             onChange={handleBrandChange}
           />
           Men's Clothing
@@ -68,7 +68,7 @@ function FilterSidebar({ applyFilters }) {
           <input
             type="checkbox"
             value="women's clothing"
-            checked={selectedBrand.includes("women's clothing")}
+            checked={selectedBrand == ("women's clothing")}
             onChange={handleBrandChange}
           />
           Women's Clothing

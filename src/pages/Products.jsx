@@ -5,11 +5,11 @@ import { useLocation,Link } from 'react-router-dom';
 import AdvFilter from '../components/AdvFilter';
 
 export default function Products({filtered}){
-    const { addToCart,isAdded }=useContext(ShopContext)
+    const { addToCart,isAdded,userId,token}=useContext(ShopContext)
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [selectedBrand, setSelectedBrand] = useState('');
     const [selectedPrice, setSelectedPrice] = useState('');
-    
+    const [quantity, setQuantity] = useState(1);
     const applyFilters = (brand, price) => {
         setSelectedBrand(brand);
         setSelectedPrice(price);
@@ -30,12 +30,12 @@ export default function Products({filtered}){
     function Products({product}){
         return(
             <li className="product">
-                <Link to={`/Product/${product.id}`} style={{ textDecoration: 'none' ,color: 'black',}}>
+                <Link to={`/Product/${product._id}`} style={{ textDecoration: 'none' ,color: 'black',}}>
                     <img src={product.image} alt="product-image" className='image'/>
                     <h4>{product.title}</h4>
                 </Link>
                 <h4>Price: ${product.price}</h4>
-                <button className={`add-to-cart`} onClick={()=>  addToCart(product.id)}>Add to Cart</button>
+                <button className={`add-to-cart`} onClick={(e)=>  {addToCart(e,token,userId,product._id,quantity,product.price,product.title,product.image)}}>Add to Cart</button>
             </li>
         )
     }
@@ -50,7 +50,7 @@ export default function Products({filtered}){
             {
              
               (filteredProducts.length>0?filteredProducts:filtered).map((product)=>{
-                    return (<Products key={product.id} product={product}/>)
+                    return (<Products key={product._id} product={product}/>)
               })
             }
             </ul>

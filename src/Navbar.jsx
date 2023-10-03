@@ -2,8 +2,9 @@ import { Link, useMatch, useResolvedPath, useNavigate } from "react-router-dom"
 import {AiOutlineShoppingCart, AiOutlineSearch} from 'react-icons/ai'
 import logo from './components/DN-logos_transparent.png'; 
 import { useState } from "react";
-import Hamburger from 'hamburger-react'
-export default function Navbar({search,handleSearchChange}) {
+import { ShopContext } from './components/shopList';
+import { useContext } from 'react';
+export default function Navbar({search,handleSearchChange,user}) {
   const navigate =useNavigate()
   const [isOpen, setOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false);
@@ -30,7 +31,7 @@ export default function Navbar({search,handleSearchChange}) {
       </div>
       <ul className={menuOpen ? "open" : ""} onClick={() => setMenuOpen(!menuOpen)}>
         <CustomLink to="/products">Products</CustomLink>
-        <CustomLink to="/signin" >Sign in</CustomLink>
+        {user==""?<CustomLink to="/signin" >Sign in</CustomLink>:<CustomLink to="/SignOut" >SignOut</CustomLink>}
         <CustomLink to="/cart" ><AiOutlineShoppingCart/></CustomLink>
       </ul>
     </nav>
