@@ -13,7 +13,7 @@ export default function Home(){
     const BASE_URL = `https://store-dcq8.onrender.com/api`
 
     async function fetchProducts() {
-        const response = await fetch(`https://fakestoreapi.com/products`)
+        const response = await fetch(`${BASE_URL}/products`)
         const result = await response.json()
         console.log(result)
         setProducts(result)

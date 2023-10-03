@@ -4,14 +4,15 @@ import { Routes, Route, Link } from "react-router-dom";
 import Home from './pages/Home'
 import Cart from './pages/Cart';
 import SignUp from './pages/SignUp';
-import SignIn from './pages/SignIn';
+import SignIn from './pages/Signin';
 import Products from './pages/Products';
 import { ShopContextProvider } from './components/shopList';
 import Navbar from './Navbar';
+import SignOut from './components/SignOut';
 import ProductDetail from './pages/ProductDetail';
 
 function App() {
-
+  const [user,setUser] =useState("")
   const [products,setProducts] =useState([]);
   const [search,setSearch] = useState("");
   
@@ -19,7 +20,13 @@ function App() {
   const [filtered,setFiltered] =useState([]);
 
   async function fetchProducts() {
-    const response = await fetch('https://fakestoreapi.com/products/')
+    const response = await fetch('https://store-dcq8.onrender.com/api/products',{
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        },
+        mode: 'cors',
+        method: "GET",
+    })
     const result = await response.json()
     setProducts(result)
     setFiltered(result)
@@ -55,14 +62,15 @@ function App() {
 
   return (
     <>
-    <Navbar search={search} handleSearchChange={handleSearchChange}/>
+    <Navbar search={search} handleSearchChange={handleSearchChange} user={user}/>
     <div id="main-section">
       <ShopContextProvider>
         <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/Products" element={<Products filtered={filtered}/>}/>
           <Route path="/Product/:id" element={<ProductDetail/>}/>
-          <Route path="/SignIn" element={<SignIn />}/>
+          <Route path="/SignIn" element={<SignIn setUser={setUser}/>}/>
+          <Route path="/SignOut" element={<SignOut setUser={setUser}/>}/>
           <Route path="/SignUp" element={<SignUp />}/>
           <Route path="/Cart" element={<Cart products={products}/>}/>
         </Routes> 

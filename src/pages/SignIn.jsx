@@ -3,9 +3,9 @@ import { useNavigate,useLocation } from "react-router-dom";
 import { useContext } from 'react';
 import { ShopContext } from '../components/shopList';
 import { Link } from "react-router-dom";
-export default function SignIn(){
+export default function SignIn({setUser}){
   const BASE_URL = `https://store-dcq8.onrender.com/api`
-    const { setToken,setId }= useContext(ShopContext)
+    const { setToken,setId ,setUserId}= useContext(ShopContext)
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
@@ -21,16 +21,17 @@ export default function SignIn(){
                 'Content-Type': 'application/json'
               },
               body: JSON.stringify({
-                user: {
-                  "username": username,
-                  "password": password
-                }
+                "username": username,
+                "password": password
+                
               })
             });
+
             const result = await response.json();
             console.log(result.token)
             setToken(result.token)
-            setId(result._id)
+            setUserId(result._id)
+            setUser(result.username)
             navigate('/')
           
           } catch (err) {
@@ -38,8 +39,7 @@ export default function SignIn(){
           }
         
     }
-    
-
+  
     return (
         <div>
           
